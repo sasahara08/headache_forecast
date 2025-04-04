@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規登録</title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+    <link rel="stylesheet" href="../static/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Potta+One&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+
+    <!-- ポップアップメッセージ -->
+    <!-- メッセージをJinja2で表示 -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="flash-message {{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <header>
+
+        <div class="title">
+            <a href="/">
+                <h1>頭痛予報</h1>
+            </a>
+        </div>
+
+        <!-- ログインボタン切り替え -->
+        <div class="loginBtn">
+            {% if user %}
+            <a href="/logout">ログアウト</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <h1>新規登録</h1>
+
+    <form action="/signup" method="post">
+
+        <p style="color: tomato;">{{ msg }}</p>
+
+        <div class="formBox">
+            <p>メールアドレス</p>
+            <input type="email" name="email">
+        </div>
+
+        <div class="formBox">
+            <p>パスワード</p>
+            <input type="password" name="password">
+        </div>
+
+        <input type="submit" value="登録">
+
+    </form>
+
+</body>
+
+</html>

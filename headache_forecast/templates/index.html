@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>頭痛予報</title>
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+    <link rel="stylesheet" href="../static/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&family=Potta+One&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h1>頭痛予報</h1>
+        </div>
+
+        <!-- ログインボタン切り替え -->
+        <div class="loginBtn">
+            {% if user %}
+            <a href="/logout">ログアウト</a>
+            {% else %}
+            <a href="/login">ログイン</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <!-- 薬の服用回数を表示(ログインユーザーのみ) -->
+    {% if user %}
+    {% if takingCount %}
+    <div class="takingCount">
+        <h3>頭痛薬服用状況 : {{ takingCount[4] }}</h3>
+        <div class="takingCountMsg">
+            <p>本日の服用回数 : {{ takingCount[2] }}</p>
+            <p>前回服用時刻　 : {{ takingCount[3] }}</p>
+        </div>
+        <form action="/countUp" method="post">
+            <input type="submit" value="服用する">
+        </form>
+    </div>
+    {% else %}
+    <div class="takingCount">
+        <h3>頭痛薬服用状況</h3>
+        <div class="takingCountMsg">
+            <p>本日の服用回数 : 0</p>
+            <p>前回服用時刻　 : 本日はまだ服用していません。</p>
+        </div>
+        <form action="/countUp" method="get">
+            <input type="submit" value="服用する">
+        </form>
+    </div>
+    {% endif %}
+    {% endif %}
+
+
+    <!-- 注意喚起画面 -->
+    <main>
+        <div class="contentsTop">
+            <div class="mainContainer">
+                <div class="nowPlaceText">
+                    <span>現在観測地 : {{disPlayCityName}}</span>
+                </div>
+
+                <div class="display">
+                    <div class="msgDanger">
+                        {% if dangerNotification == 1 %}
+                        <span class="danger">頭痛注意</span>
+                        <span class="material-symbols-outlined safeicon">
+                            person_alert
+                        </span>
+                        {% else %}
+                        <span class="safe">気圧安定</span>
+                        <span class="material-symbols-outlined safeicon">
+                            local_hospital
+                        </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="nowAir">
+                        <p>直近の気圧 : {{data_24h[0]['main']['pressure']}} hPa</p>
+                    </div>
+
+                    <div class="nowTime">
+                        {% set dt = data_24h[0]['dt'] %}
+                        {% set datetime = dt | timestamp_to_datetime %}
+                        <p>測定時刻 : {{ datetime.strftime('%H:%M') }}</p>
+                        <!-- <p>測定時刻 : {{datetime.strftime('%H:%M')}}</p> -->
+                    </div>
+                    <p>偏頭痛の発生リスクが高まる気圧変動(6hPa以上)が予測される際に、偏頭痛の注意喚起を行います。</p>
+                </div>
+            </div>
+
+            <div class="placePoint">
+                <form action="/" method="post">
+                    <label class="selectbox-6">
+                        <select name="cityName" id="cityName">
+                            <option value="Hokkaido,JP">北海道</option>
+                            <option value="Sendai,JP">仙台</option>
+                            <option value="Tokyo,JP">東京</option>
+                            <option value="Nagoya,JP">名古屋</option>
+                            <option value="Osaka,JP">大阪</option>
+                            <option value="Hiroshima,JP">広島</option>
+                            <option value="Fukuoka,JP" selected>福岡</option>
+                            <option value="Kagoshima,JP">鹿児島</option>
+                        </select>
+                    </label>
+                    <input type="submit" value="観測地変更">
+                </form>
+            </div>
+        </div>
+
+        <!-- 予報一覧 -->
+        <div class="weatherList">
+
+            <div class="ListTitle">
+                <h3>今後24時間の予報</h3>
+                <div class="nowPlaceText">
+                    <span>現在観測地 : {{disPlayCityName}}</span>
+                </div>
+            </div>
+
+            <div class="listFlex">
+                {% for data in data_24h %}
+                <div class="listContent">
+                    <ul>
+                        <li>
+                            <span>時刻</span>
+                            {% set dt = data['dt'] %}
+                            {% set datetime = dt | timestamp_to_datetime %}
+                            <span>{{ datetime.strftime('%m月%d日 %H:%M') }}</span>
+                        </li>
+                        <li>
+                            <span>気温</span>
+                            <span>{{ data['main']['temp'] }}°C</span>
+                        </li>
+                        <li>
+                            <span>気圧</span>
+                            <span>{{ data['main']['pressure'] }} hPa</span>
+                        </li>
+                        <li>
+                            <span>天気</span>
+                            <span>
+                                {% if data['weather'][0]['description'] == 'clear sky' %}
+                                晴天
+                                {% elif data['weather'][0]['description'] == 'few clouds' %}
+                                薄曇り
+                                {% elif data['weather'][0]['description'] == 'scattered clouds' %}
+                                まばらな雲
+                                {% elif data['weather'][0]['description'] == 'broken clouds' %}
+                                厚い雲
+                                {% elif data['weather'][0]['description'] == 'shower rain' %}
+                                にわか雨
+                                {% elif data['weather'][0]['description'] == 'rain' %}
+                                雨
+                                {% elif data['weather'][0]['description'] == 'thunderstorm' %}
+                                雷雨
+                                {% elif data['weather'][0]['description'] == 'snow' %}
+                                雪
+                                {% elif data['weather'][0]['description'] == 'mist' %}
+                                霧
+                                {% elif data['weather'][0]['description'] == 'overcast clouds' %}
+                                どんよりした雲
+                                {% elif data['weather'][0]['description'] == 'light snow' %}
+                                小雪
+                                {% elif data['weather'][0]['description'] == 'heavy snow' %}
+                                大雪
+                                {% elif data['weather'][0]['description'] == 'sleet' %}
+                                みぞれ
+                                {% elif data['weather'][0]['description'] == 'light rain' %}
+                                小雨
+                                {% elif data['weather'][0]['description'] == 'heavy rain' %}
+                                大雨
+                                {% else %}
+                                {{ data['weather'][0]['description'] }} {# 英語のまま表示 #}
+                                {% endif %}
+                            </span>
+                            <img src="https://openweathermap.org/img/wn/{{ data['weather'][0]['icon'] }}.png" alt="天気">
+                        </li>
+
+                    </ul>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </main>
+
+</body>
+
+</html>

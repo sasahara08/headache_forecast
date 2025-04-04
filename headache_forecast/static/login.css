@@ -1,0 +1,112 @@
+body {
+    font-family: "M PLUS 1", "Noto Sans JP", sans-serif;
+    width: 70%;
+    min-width: 600px;
+    margin: auto;
+    padding: 0;
+}
+
+header {
+    background-color: #f0f0f0;
+    padding: 15px;
+    width: 70%;
+    margin: auto;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title h1 {
+    margin: 0;
+}
+
+.loginBtn a {
+    text-decoration: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.loginBtn a:hover {
+    background-color: #65bb68;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    color: #008CBA;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.213);
+}
+
+.inputForm {
+    margin-bottom: 80px;
+}
+
+.formBox {
+    margin-bottom: 30px;
+}
+
+.formBox p {
+    margin: 5px 0;
+}
+
+.formBox input[type="email"],
+.formBox input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+}
+
+input[type="submit"] {
+    background-color: #008CBA;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 200px;
+    display: block;
+    margin: auto;
+}
+
+input[type="submit"]:hover {
+    background-color: #23a2cc;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.resistUserBtn {
+    background-color: #4CAF50; /* 直接クラスにスタイルを適用 */
+    color: white; /* 文字色を追加 */
+    padding: 10px 15px; /* パディングを追加 */
+    border: none; /* ボーダーを削除 */
+    border-radius: 4px; /* 角丸を追加 */
+    cursor: pointer; /* カーソルをポインターに変更 */
+    width: 200px; /* 幅を追加 */
+    display: block; /* ブロック要素に変更 */
+    margin: 20px auto; /* マージンを追加 */
+}
+
+.resistUserBtn:hover {
+    background-color: #65bb68;
+}
