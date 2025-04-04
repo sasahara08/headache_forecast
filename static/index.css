@@ -1,15 +1,15 @@
 body {
     font-family: "M PLUS 1", "Noto Sans JP", sans-serif;
-    width: 70%;
-    min-width: 600px;
+    width: 95%; /* 画面幅に合わせて調整 */
+    min-width: auto; /* 最小幅を自動調整 */
     margin: auto;
     padding: 0;
 }
 
 header {
     background-color: #f0f0f0;
-    padding: 15px 50px;
-    margin-bottom: 30px;
+    padding: 15px 5%; /* 左右のパディングを調整 */
+    margin-bottom: 20px; /* マージンを調整 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,15 +17,17 @@ header {
 
 .title h1 {
     margin: 0;
+    font-size: 1.2em; /* フォントサイズを調整 */
 }
 
 .loginBtn a {
     text-decoration: none;
     background-color: #4CAF50;
     color: white;
-    padding: 8px 16px;
+    padding: 8px 12px; /* パディングを調整 */
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    font-size: 0.9em; /* フォントサイズを調整 */
 }
 
 .loginBtn a:hover {
@@ -33,12 +35,11 @@ header {
 }
 
 .takingCount {
-    width: 70%;
-    min-width: 600px;
+    width: 90%; /* 画面幅に合わせて調整 */
+    min-width: auto; /* 最小幅を自動調整 */
     margin: auto;
     background-color: #e0e0e0;
-    padding: 20px 40px;
-    /* margin: 15px; */
+    padding: 20px 5%; /* 左右のパディングを調整 */
     border-radius: 4px;
 }
 
@@ -48,7 +49,7 @@ header {
     margin-bottom: 0.2rem;
     border-bottom: 3px dotted #323232;
     font-weight: bold;
-    font-size: 22px;
+    font-size: 1.1em; /* フォントサイズを調整 */
 }
 
 .takingCountMsg {
@@ -70,7 +71,7 @@ header {
     transition: background-color 0.3s ease;
 }
 
-.takingCount form input[type="submit"]:hover{
+.takingCount form input[type="submit"]:hover {
     background-color: #23a2cc;
 }
 
@@ -79,22 +80,22 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 20px 5%; /* 左右のパディングを調整 */
 }
 
-.contentsTop{
+.contentsTop {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px; /* マージンを調整 */
 }
 
 .mainContainer {
     background-color: #f8f8f8;
     padding: 20px;
     border-radius: 4px;
-    width: 600px;
-    height: 600px;
+    width: 90%; /* 画面幅に合わせて調整 */
+    height: auto; /* 高さを自動調整 */
     box-shadow: 0px 0px 15px -5px #77777774;
     border-radius: 10px;
 }
@@ -117,8 +118,8 @@ main {
 }
 
 .msgDanger {
-    height: 300px;
-    font-size: 4em;
+    height: auto; /* 高さを自動調整 */
+    font-size: 3em; /* フォントサイズを調整 */
     font-weight: bold;
     margin-bottom: 10px;
     display: flex;
@@ -132,9 +133,10 @@ main {
     font-family: "Noto Sans JP", sans-serif;
 }
 
-.msgDanger>.dangerIcon {
+.msgDanger>.dangerIcon,
+.msgDanger>.safeicon {
     color: #666;
-    font-size: 150px;
+    font-size: 100px; /* アイコンサイズを調整 */
 }
 
 .msgDanger>.safe {
@@ -142,21 +144,16 @@ main {
     font-family: "M PLUS 1", "Noto Sans JP", sans-serif;
 }
 
-.msgDanger>.safeicon{
-    color: #666;
-    font-size: 150px;
-}
-
 .nowAir,
 .nowTime {
-    margin-bottom: 20px;
-    font-size: large;
+    margin-bottom: 15px; /* マージンを調整 */
+    font-size: 1em; /* フォントサイズを調整 */
     font-weight: 600;
     color: #444;
 }
 
-.display>p{
-    font-size: 12px;
+.display>p {
+    font-size: 10px; /* フォントサイズを調整 */
     margin: 5px 20px;
     color: tomato;
 }
@@ -174,13 +171,14 @@ main {
 
 .weatherList {
     margin-top: 20px;
-    width: 70%;
+    width: 90%; /* 画面幅に合わせて調整 */
 }
 
-.ListTitle>h3{
+.ListTitle>h3 {
     border-bottom: #333333 1px solid;
     padding-bottom: 5px;
     margin: 15px 0;
+    font-size: 1.2em; /* フォントサイズを調整 */
 }
 
 .listFlex {
@@ -191,7 +189,7 @@ main {
 
 .listContent {
     background-color: #bdbdbd;
-    width: 200px;
+    width: 45%; /* 画面幅に合わせて調整 */
     padding: 15px;
     margin: 8px;
     border-radius: 4px;
@@ -216,75 +214,27 @@ main {
     margin: auto;
 }
 
-/* selectコピペ------------------ */
-はい、「観測地変更」ボタンのCSSを記述します。ボタンのデザインを調整し、選択ボックスとのバランスを取りつつ、視覚的に分かりやすくします。
+/* メディアクエリ（スマートフォン向け） */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column; /* 要素を縦に並べる */
+        align-items: flex-start; /* 左寄せ */
+    }
 
-CSS
+    .loginBtn {
+        margin-top: 10px; /* マージンを追加 */
+    }
 
-.placePoint {
-    margin-top: 20px;
-    display: flex; /* Flexboxを使用して要素を横並びにする */
-    align-items: center; /* 要素を垂直方向に中央揃えにする */
-    justify-content: center; /* 要素を水平方向に中央揃えにする */
+    .msgDanger {
+        font-size: 2em; /* フォントサイズを調整 */
+    }
+
+    .msgDanger>.dangerIcon,
+    .msgDanger>.safeicon {
+        font-size: 80px; /* アイコンサイズを調整 */
+    }
+
+    .listContent {
+        width: 95%; /* 画面幅に合わせて調整 */
+    }
 }
-
-.placePoint form select,
-.placePoint form input[type="submit"] {
-    padding: 10px 15px; /* パディングを調整 */
-    margin: 5px; /* マージンを追加 */
-    border-radius: 5px; /* 角丸を調整 */
-    border: 1px solid #ccc; /* ボーダーを調整 */
-    font-size: 1em; /* フォントサイズを調整 */
-    cursor: pointer; /* カーソルをポインターに変更 */
-}
-
-.placePoint form input[type="submit"] {
-    background-color: #008CBA; /* 背景色を調整 */
-    color: white; /* 文字色を調整 */
-    border: none; /* ボーダーを削除 */
-    transition: background-color 0.3s ease; /* トランジションを追加 */
-}
-
-.placePoint form input[type="submit"]:hover {
-    background-color: #23a2cc; /* ホバー時の背景色を調整 */
-}
-
-.selectbox-6 {
-    position: relative;
-}
-
-.selectbox-6::before,
-.selectbox-6::after {
-    position: absolute;
-    right: 15px;
-    width: 9px;
-    height: 6px;
-    background-color: #535353;
-    content: '';
-    pointer-events: none;
-}
-
-.selectbox-6::before {
-    top: calc(50% - 9px);
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
-}
-
-.selectbox-6::after {
-    bottom: calc(50% - 9px);
-    clip-path: polygon(0 0, 50% 100%, 100% 0);
-}
-
-.selectbox-6 select {
-    width: 200px;
-    appearance: none;
-    min-width: 230px;
-    height: 2.8em;
-    padding: .4em calc(.8em + 30px) .4em .8em;
-    border: 1px solid #d0d0d0;
-    border-radius: 25px;
-    background-color: #fff;
-    color: #333333;
-    font-size: 1em;
-    cursor: pointer;
-}
-/* -------------------------------------------- */

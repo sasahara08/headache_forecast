@@ -1,17 +1,17 @@
 body {
     font-family: "M PLUS 1", "Noto Sans JP", sans-serif;
-    width: 70%;
-    min-width: 600px;
+    width: 95%; /* 画面幅に合わせて調整 */
+    min-width: auto; /* 最小幅を自動調整 */
     margin: auto;
     padding: 0;
 }
 
 header {
     background-color: #f0f0f0;
-    padding: 15px;
-    width: 70%;
+    padding: 15px 5%; /* 左右のパディングを調整 */
+    width: 90%; /* 画面幅に合わせて調整 */
     margin: auto;
-    margin-bottom: 100px;
+    margin-bottom: 50px; /* マージンを調整 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -19,14 +19,16 @@ header {
 
 .title h1 {
     margin: 0;
+    font-size: 1.2em; /* フォントサイズを調整 */
 }
 
 .loginBtn a {
     text-decoration: none;
     background-color: #4CAF50;
     color: white;
-    padding: 8px 16px;
+    padding: 8px 12px; /* パディングを調整 */
     border-radius: 4px;
+    font-size: 0.9em; /* フォントサイズを調整 */
 }
 
 .loginBtn a:hover {
@@ -36,16 +38,18 @@ header {
 h1 {
     text-align: center;
     margin-bottom: 20px;
+    font-size: 1.5em; /* フォントサイズを調整 */
 }
 
 h2 {
     text-align: center;
     color: #008CBA;
     margin-bottom: 20px;
+    font-size: 1.3em; /* フォントサイズを調整 */
 }
 
 form {
-    width: 600px;
+    width: 90%; /* 画面幅に合わせて調整 */
     margin: 20px auto;
     padding: 20px;
     border-radius: 8px;
@@ -53,11 +57,11 @@ form {
 }
 
 .inputForm {
-    margin-bottom: 80px;
+    margin-bottom: 40px; /* マージンを調整 */
 }
 
 .formBox {
-    margin-bottom: 30px;
+    margin-bottom: 20px; /* マージンを調整 */
 }
 
 .formBox p {
@@ -74,19 +78,21 @@ form {
     background-color: #f9f9f9;
 }
 
-input[type="submit"] {
+input[type="submit"],
+.resistUserBtn {
     background-color: #008CBA;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 200px;
+    width: 100%; /* 幅を調整 */
     display: block;
-    margin: auto;
+    margin: 10px auto; /* マージンを調整 */
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+.resistUserBtn:hover {
     background-color: #23a2cc;
 }
 
@@ -95,18 +101,14 @@ a {
     text-decoration: none;
 }
 
-.resistUserBtn {
-    background-color: #4CAF50; /* 直接クラスにスタイルを適用 */
-    color: white; /* 文字色を追加 */
-    padding: 10px 15px; /* パディングを追加 */
-    border: none; /* ボーダーを削除 */
-    border-radius: 4px; /* 角丸を追加 */
-    cursor: pointer; /* カーソルをポインターに変更 */
-    width: 200px; /* 幅を追加 */
-    display: block; /* ブロック要素に変更 */
-    margin: 20px auto; /* マージンを追加 */
-}
+/* メディアクエリ（スマートフォン向け） */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column; /* 要素を縦に並べる */
+        align-items: flex-start; /* 左寄せ */
+    }
 
-.resistUserBtn:hover {
-    background-color: #65bb68;
+    .loginBtn {
+        margin-top: 10px; /* マージンを追加 */
+    }
 }
