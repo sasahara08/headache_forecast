@@ -2,15 +2,20 @@ from flask import Flask, flash, render_template, request, redirect, session
 from datetime import datetime
 import sqlite3
 import model
+import pytz
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 # カスタムフィルタを定義
 @app.template_filter('timestamp_to_datetime')
-def timestamp_to_datetime(timestamp):
-    # タイムスタンプを datetime オブジェクトに変換
-    return datetime.fromtimestamp(timestamp)
+def timestamp_to_datetime_jst(timestamp):
+    # タイムスタンプをUTCのdatetimeオブジェクトに変換
+    utc_time = datetime.fromtimestamp(timestamp, tz=pytz.utc)
+    # タイムゾーンをJSTに変換
+    jst_timezone = pytz.timezone('Asia/Tokyo')
+    jst_time = utc_time.astimezone(jst_timezone)
+    return jst_time
 
 # ホーム画面
 @app.route("/", methods=['GET', 'POST'])
@@ -217,3 +222,4 @@ def postSignin():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+    # app.run()
