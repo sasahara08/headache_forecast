@@ -81,8 +81,8 @@ def indexAccess():
 
     # 取得した要素内で気圧の低下が見られたら警告を出す。
     for i in range(len(data_24h) - 2):
-        if (data_24h[i]['main']['pressure'] - data_24h[i + 2]['main']['pressure'] >= 6) or (data_24h[i]['main']['pressure'] - data_24h[i + 1]['main']['pressure'] >= 6):
-            print('気圧が6hPA以上下がっています')
+        if (data_24h[i]['main']['pressure'] - data_24h[i + 2]['main']['pressure'] >= 3) or (data_24h[i]['main']['pressure'] - data_24h[i + 1]['main']['pressure'] >= 3):
+            print('気圧が3hPA以上下がっています')
             dangerNotification = 1
     # print(dangerNotification)
     
