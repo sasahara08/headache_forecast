@@ -1,6 +1,6 @@
     body {
         font-family: "M PLUS 1", "Noto Sans JP", sans-serif;
-        width: 70%;
+        width: 80%;
         min-width: 600px;
         margin: auto;
         padding: 0;
@@ -120,7 +120,6 @@
         height: 300px;
         font-size: 4em;
         font-weight: bold;
-        margin-bottom: 10px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -148,11 +147,19 @@
     }
 
     .nowAir,
-    .nowTime {
+    .nowTime,
+    .dengerTime {
         margin-bottom: 20px;
         font-size: large;
         font-weight: 600;
         color: #444;
+    }
+
+    .dengerTime{
+        color: tomato;
+        border-bottom: tomato solid 1px;
+        padding-bottom: 3px;
+        margin-bottom: 30px;
     }
 
     .display>p{
@@ -187,6 +194,7 @@
         display: flex;
         flex-wrap: wrap;
         margin: 20px auto;
+        max-width: 650px;
     }
 
     .listContent {

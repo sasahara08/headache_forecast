@@ -1,4 +1,5 @@
 import requests, sqlite3, datetime
+import pytz
 
 #特定地域の現在から２４時間の気象情報を取得
 def getNowParameter(cityName):
@@ -38,7 +39,7 @@ def newCount(userId):
     todayData = datetime.date.today()
 
     #今の時刻を取得
-    takingTime = datetime.datetime.now().strftime('%H:%M')
+    takingTime = datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime('%H:%M')
     
     # DB接続--------------------------------------------
     connection = sqlite3.connect('headache.db')
@@ -60,7 +61,7 @@ def countUp(count, userId):
     todayData = datetime.date.today()
 
     #今の時刻を取得
-    takingTime = datetime.datetime.now().strftime('%H:%M')
+    takingTime = datetime.datetime.now(pytz.timezone('Asia/Tokyo')).strftime('%H:%M')
 
     # DB接続--------------------------------------------
     connection = sqlite3.connect('headache.db')

@@ -68,6 +68,8 @@
                 </div>
 
                 <div class="display">
+
+                    <!-- 頭痛の注意と気圧安定表示を切り替える -->
                     <div class="msgDanger">
                         {% if dangerNotification == 1 %}
                         <span class="danger">頭痛注意</span>
@@ -82,6 +84,13 @@
                         {% endif %}
                     </div>
 
+                    <!-- 頭痛の注意時に何時から注意すべきか時刻を表示する -->
+                    {% if dangerNotification == 1 %}
+                    {% set dt = dengerTime | timestamp_to_datetime %}
+                    <span class="dengerTime">頭痛注意時刻 : {{dt.strftime('%H:%M')}} ~</span>
+                    {% endif %}
+
+
                     <div class="nowAir">
                         <p>直近の気圧 : {{data_24h[0]['main']['pressure']}} hPa</p>
                     </div>
@@ -90,7 +99,6 @@
                         {% set dt = data_24h[0]['dt'] %}
                         {% set datetime = dt | timestamp_to_datetime %}
                         <p>測定時刻 : {{ datetime.strftime('%H:%M') }}</p>
-                        <!-- <p>測定時刻 : {{datetime.strftime('%H:%M')}}</p> -->
                     </div>
                     <p>偏頭痛の発生リスクが高まる気圧変動(6hPa以上)が予測される際に、偏頭痛の注意喚起を行います。</p>
                 </div>

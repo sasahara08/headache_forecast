@@ -78,11 +78,15 @@ def indexAccess():
     # ６時間後の気圧の差が6hPAある場合警告を出す。
     # 0・・・安全　１・・・危険
     dangerNotification = 0
+    # 注意すべき時刻を表示
+    dengerTime = None
 
     # 取得した要素内で気圧の低下が見られたら警告を出す。
     for i in range(len(data_24h) - 2):
-        if (data_24h[i]['main']['pressure'] - data_24h[i + 2]['main']['pressure'] >= 6) or (data_24h[i]['main']['pressure'] - data_24h[i + 1]['main']['pressure'] >= 6):
-            print('気圧が6hPA以上下がっています')
+        if (data_24h[i]['main']['pressure'] - data_24h[i + 2]['main']['pressure'] >= 3) or (data_24h[i]['main']['pressure'] - data_24h[i + 1]['main']['pressure'] >= 3):
+            # print('気圧が6hPA以上下がっています')
+            if(not dengerTime):
+                dengerTime = data_24h[i]['dt']
             dangerNotification = 1
     # print(dangerNotification)
     
@@ -91,11 +95,15 @@ def indexAccess():
         takingCount = model.takingCount(user[0])
     else:
         takingCount = None
+        
+    print(dangerNotification)
+    print(dengerTime)
 
     return render_template('index.html',
                            disPlayCityName=disPlayCityName,
                            data_24h=data_24h,
                            dangerNotification=dangerNotification,
+                           dengerTime = dengerTime,
                            user=user,
                            takingCount=takingCount
                            )
